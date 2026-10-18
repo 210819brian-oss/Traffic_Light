@@ -5,24 +5,24 @@
 ## 功能
 
 | 状态码 | 主路 | 支路 | 持续时间 |
-| ------ | ---- | ---- | -------: |
-| `00`   | 绿灯 | 红灯 |    30 秒 |
-| `01`   | 黄灯 | 红灯 |     5 秒 |
-| `10`   | 红灯 | 绿灯 |    20 秒 |
-| `11`   | 红灯 | 黄灯 |     5 秒 |
+| --- | --- | --- | ---: |
+| `00` | 绿灯 | 红灯 | 30 秒 |
+| `01` | 黄灯 | 红灯 | 5 秒 |
+| `10` | 红灯 | 绿灯 | 20 秒 |
+| `11` | 红灯 | 黄灯 | 5 秒 |
 
 四个状态依次循环。`rst_n` 为低电平有效；复位后进入主路绿灯、支路红灯状态。
 
 ## 工程结构
 
-| 文件                                       | 作用                         |
-| ------------------------------------------ | ---------------------------- |
-| `Traffic_Light.qpf`、`Traffic_Light.qsf`   | Quartus 工程和器件配置       |
-| `Traffic_Light.bdf`                        | 顶层原理图，连接三个器件     |
-| `timer_1s.v`、`timer_1s.bsf`               | 计数并产生 `tick_1s` 脉冲    |
-| `traffic_fsm.v`、`traffic_fsm.bsf`         | 30/5/20/5 秒倒计时与状态转换 |
-| `traffic_decoder.v`、`traffic_decoder.bsf` | 将两位状态码译成六路灯信号   |
-| `docs/交通灯控制器全部Verilog代码.pdf`     | 三个模块的代码汇总           |
+| 文件 | 作用 |
+| --- | --- |
+| `Traffic_Light.qpf`、`Traffic_Light.qsf` | Quartus 工程和器件配置 |
+| `Traffic_Light.bdf` | 顶层原理图，连接三个器件 |
+| `timer_1s.v`、`timer_1s.bsf` | 计数并产生 `tick_1s` 脉冲 |
+| `traffic_fsm.v`、`traffic_fsm.bsf` | 30/5/20/5 秒倒计时与状态转换 |
+| `traffic_decoder.v`、`traffic_decoder.bsf` | 将两位状态码译成六路灯信号 |
+| `docs/交通灯控制器全部Verilog代码.pdf` | 三个模块的代码汇总 |
 
 `clk` 和 `rst_n` 同时连接计时器与状态机；计时器的 `tick_1s` 接状态机；状态机的 `state_0`、`state_1` 接译码器；译码器输出主路和支路各三盏灯的控制信号。
 
